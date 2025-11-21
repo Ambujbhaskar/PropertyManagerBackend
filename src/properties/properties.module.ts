@@ -1,9 +1,16 @@
 import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Property, PropertySchema } from './property.schema';
 import { PropertiesService } from './properties.service';
 import { PropertiesController } from './properties.controller';
 
 @Module({
-  providers: [PropertiesService],
+  imports: [
+    MongooseModule.forFeature([
+      { name: Property.name, schema: PropertySchema },
+    ]),
+  ],
   controllers: [PropertiesController],
+  providers: [PropertiesService],
 })
 export class PropertiesModule {}
